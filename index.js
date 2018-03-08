@@ -25,7 +25,6 @@ app.post('/upload', function (req, res){
 
     form.on("error", function(error){
         httpMsgs.send500(req, res, error);
-        // console.log(error);
     });
 
     form.on('end', function (){
@@ -34,6 +33,5 @@ app.post('/upload', function (req, res){
         });
     });
 
-    // res.sendFile(__dirname + '/index.html');
 });
 
