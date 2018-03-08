@@ -2,6 +2,9 @@ const express = require("express");
 const formidable = require("formidable");
 const httpMsgs = require("http-msgs");
 const path = require("path");
+const fs = require("fs");
+
+
 
 
 const app = express();
@@ -17,19 +20,21 @@ app.get("/", function(req, res){
 app.post('/upload', function (req, res){
     var form = new formidable.IncomingForm();
 
-    form.parse(req);
+    form.parse(req);//parse the req
 
-    form.on('fileBegin', function (err, file){
+    form.on('fileBegin', function (err, file){// begin
         file.path = __dirname + '/uploads/' + file.name;
+        
     });
 
-    form.on("error", function(error){
+
+    form.on("error", function(error){//error
         httpMsgs.send500(req, res, error);
     });
 
-    form.on('end', function (){
+    form.on('end', function (){//end the 
         httpMsgs.sendJSON(req, res, {
-            Uploaded    : "File"
+            Uploaded    : "file"
         });
     });
 

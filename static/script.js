@@ -2,8 +2,6 @@ $(document).ready(function(){
     $("form").submit(function(evt){	 
         evt.preventDefault();
         var formData = new FormData($(this)[0]);
-
-
      $.ajax({
          url: '/upload',
          type: 'POST',
@@ -13,7 +11,10 @@ $(document).ready(function(){
          enctype: 'multipart/form-data',
          processData: false,
          success: function (response) {
-           alert(response);
+          $("#disResult").text(response.Uploaded);
+         },
+         error  : function(error){
+             $("#disResult").text (error.responseJSON.data);
          }
      });
      return false;
